@@ -71,7 +71,7 @@ python -m pip check
 
 The dataset download script is:
 
-` scripts/download_dataset.py `
+`scripts/download_dataset.py`
 
 Run it from the project root:
 
@@ -120,7 +120,7 @@ The pipeline executes the following stages sequentially:
 File: `src/ingestion.py`
 
 - Reads the extracted JSONL dataset.
-- Uses Apache Spark for distributed data processing.
+- Uses Apache Spark in local mode with two worker threads (`local[2]`) for data processing.
 - Records the ingestion document count and execution metrics.
 
 ### Stage 2: Deduplication
@@ -262,11 +262,11 @@ The latest recorded pipeline execution times were:
 
 | Stage | Wall-clock time |
 |---|---:|
-| Ingestion | 16.6602 seconds |
-| Deduplication | 27.7212 seconds |
-| Quality filtering | 28.1967 seconds |
-| PII processing | 22.9129 seconds |
-| Total | 95.494 seconds |
+| Ingestion | 25.66 seconds |
+| Deduplication | 34.64 seconds |
+| Quality filtering | 33.43 seconds |
+| PII processing | 23.40 seconds |
+| Total | 117.13 seconds |
 
 The runtime measurements are collected by the pipeline orchestrator.
 
@@ -274,11 +274,20 @@ The cost-estimation script is:
 
 `src/cost_estimation.py`
 
-The estimate uses an assumed reference rate of USD 0.0448 per hour for a t3.medium instance in ap-south-1.
+The estimate uses the following reference assumptions:
 
-Based on the measured local pipeline runtime of approximately 95.494 seconds, the illustrative estimated compute cost is approximately USD 0.00118837.
+| Metric | Value |
+|---|---|
+| Reference instance | t3.medium |
+| Reference region | ap-south-1 |
+| Assumed hourly rate | USD 0.0448 |
+| Pipeline runtime | 117.1265 seconds |
+| Pipeline runtime in hours | 0.03253514 |
+| Input documents | 10,000 |
+| Estimated compute cost | USD 0.00145757 |
+| Estimated cost per 1,000 input documents | USD 0.00014576 |
 
-This is a theoretical comparison, not an actual cloud bill. It assumes the same runtime on the reference instance and excludes storage, network transfer, taxes, and other cloud services.
+This is an illustrative cloud-equivalent compute estimate, not an actual cloud bill. It assumes the same runtime on the reference instance and excludes storage, network transfer, taxes, and other cloud services.
 
 ## 11. Consolidated Results
 

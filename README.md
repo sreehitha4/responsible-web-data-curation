@@ -1,4 +1,3 @@
-
 # Responsible Web-Scale Data Curation
 
 A Spark-based data curation pipeline that prepares a sample of Common Crawl text data through deduplication, quality filtering, and PII pattern detection and redaction.
@@ -224,7 +223,17 @@ The pipeline runner records stage-wise wall-clock execution times in:
 
 `results/pipeline_execution_metrics.csv`
 
-The latest recorded total pipeline wall-clock runtime was 95.494 seconds.
+The latest recorded total pipeline wall-clock runtime was approximately **117.1265 seconds**.
+
+Latest stage-wise execution times:
+
+| Stage | Wall-clock time |
+|---|---:|
+| Ingestion | 25.66 seconds |
+| Deduplication | 34.64 seconds |
+| Quality filtering | 33.43 seconds |
+| PII processing | 23.40 seconds |
+| Total | 117.13 seconds |
 
 Generate the illustrative compute cost estimate using:
 
@@ -232,7 +241,17 @@ Generate the illustrative compute cost estimate using:
 python src/cost_estimation.py
 ```
 
-The estimate uses a reference cloud instance and assumes the same runtime as the local execution. It is not an actual cloud bill.
+Latest cost estimation:
+
+| Metric | Value |
+|---|---:|
+| Reference instance | t3.medium |
+| Reference region | ap-south-1 |
+| Assumed hourly rate | USD 0.0448 |
+| Estimated compute cost | USD 0.00145757 |
+| Estimated cost per 1,000 documents | USD 0.00014576 |
+
+The estimate assumes that the local pipeline runtime remains unchanged on the reference cloud instance. It is an illustrative comparison, not an actual cloud bill.
 
 Storage, network transfer, taxes, and additional cloud services are excluded.
 
@@ -276,7 +295,7 @@ Email and phone counts can overlap because a document may contain both.
 - Exact normalized-text deduplication does not identify semantic or near-duplicate content.
 - The ASCII-based alphabetic-ratio filter may disproportionately exclude non-English or non-Latin-script content.
 - The experiment uses a 10,000-document sample from one Common Crawl segment.
-- The current Spark implementation runs locally rather than on a distributed cluster.
+- The current Spark implementation runs locally using two worker threads rather than on a distributed cluster.
 - Common Crawl access does not establish a uniform licence for all crawled pages.
 
 ## 14. Reports and Results
