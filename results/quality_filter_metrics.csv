@@ -1,0 +1,10 @@
+metric,value
+initial_documents,9833
+empty_documents_removed,0
+short_documents_removed,335
+low_word_count_removed,35
+low_alphabetic_ratio_removed,2467
+final_documents,6996
+total_removed,2837
+removal_percentage,28.85
+execution_time_seconds,22.2125

@@ -1,0 +1,4 @@
+documents,measured_runs,median_execution_time_seconds,median_throughput_docs_per_second
+2500,3,0.5165,4840.16
+5000,3,0.6004,8327.47
+10000,3,0.7429,13460.71

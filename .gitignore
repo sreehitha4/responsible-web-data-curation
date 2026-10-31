@@ -218,3 +218,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project-specific dataset exclusions
+data/raw/
+data/processed/
+data/sample/
+
+# Spark generated files
+spark-warehouse/
+metastore_db/
+
+# Project editor settings
+.vscode/
