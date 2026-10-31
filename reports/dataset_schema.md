@@ -1,43 +1,75 @@
-# Processed Dataset Schema
+# Dataset Schema and Processing Details
 
-## Project
-Responsible Web-Scale Data Curation
+## 1. Dataset Source
 
-## Dataset source
-Common Crawl WET — CC-MAIN-2026-43
+The dataset was obtained from a single WET segment of the
+Common Crawl collection CC-MAIN-2026-43.
 
-## Final processed dataset
-`data/processed/pii_redacted_parquet/`
+A sample of 10,000 text documents was extracted for this project.
+The extracted records were stored in JSONL format before being
+processed using Apache Spark.
 
-## Dataset description
-The dataset contains web text documents extracted from a Common Crawl WET segment. It has undergone exact normalized-text deduplication, heuristic quality filtering, and baseline regex-based PII detection and redaction.
+The pipeline uses only the extracted text and limited metadata.
+Full source URLs are not retained in the extracted records.
 
-## Schema
+## 2. Ingestion Schema
 
-| Column | Data type | Description |
-|---|---|---|
-| doc_id | Integer | Document identifier assigned during extraction |
-| domain | String | Hostname associated with the source document |
-| crawl_date | String | Crawl timestamp |
-| text | String | Processed text after filtering and redaction |
+The ingestion stage contains the following fields:
 
-## Processing summary
+| Column | Description |
+|---|---|
+| doc_id | Identifier assigned to an extracted document |
+| domain | Hostname associated with the source document |
+| crawl_date | Crawl date associated with the document |
+| text | Extracted textual content |
 
-- Documents extracted: 10,000
-- Documents after deduplication: 9,833
-- Documents after quality filtering: 6,996
-- Documents after PII redaction: 6,996
+Initial document count: 10,000.
 
-## Privacy considerations
+## 3. Processed Dataset Schema
 
-Email-like and phone-number-like patterns are detected and replaced using regular expressions. This baseline approach does not guarantee complete PII removal.
+After deduplication, the processed datasets contain:
 
-Raw and intermediate datasets should not be distributed as part of the public repository. The final dataset should be reviewed before external sharing.
+| Column | Description |
+|---|---|
+| doc_id | Document identifier |
+| domain | Source hostname |
+| crawl_date | Crawl date |
+| text | Document text |
+| content_hash | SHA-256 hash of normalized text, used for exact deduplication |
 
-## Known limitations
+The `content_hash` field is retained in subsequent processing stages
+to support validation and traceability of duplicate removal.
 
-- Exact normalized-text deduplication is used; near-duplicate detection is not implemented.
-- Quality filtering uses heuristic thresholds.
-- The alphabetic-ratio filter may disproportionately exclude non-English and non-Latin-script content.
-- Regex-based PII detection can produce false positives and false negatives.
-- Performance measurements were collected using local Spark execution in `local[2]` mode, not a distributed production cluster.
+## 4. Processing Stages and Record Counts
+
+| Processing stage | Documents |
+|---|---:|
+| Initial ingestion | 10,000 |
+| After deduplication | 9,833 |
+| After quality filtering | 6,996 |
+| After PII detection and redaction | 6,996 |
+
+## 5. Data Handling
+
+- Duplicate documents are identified using normalized text hashes.
+- Quality filtering removes empty, short, low-word-count, and
+  low-alphabetic-ratio documents.
+- Email and phone-like patterns are replaced with redaction
+  placeholders.
+- Raw PII values are not written to the metrics output.
+- The raw Common Crawl segment and intermediate data files are
+  excluded from Git tracking.
+
+## 6. Limitations
+
+- Deduplication identifies exact duplicates after normalization;
+  it does not perform semantic or near-duplicate detection.
+- The alphabetic-ratio filter is based on ASCII characters and may
+  disproportionately exclude non-English or non-Latin-script content.
+- PII detection uses regular expressions and cannot guarantee
+  detection of every possible personal-information pattern.
+- The experiment uses a 10,000-document sample from one Common Crawl
+  segment. Results should not be interpreted as a full web-scale
+  deployment.
+- Common Crawl availability does not imply that every crawled page
+  has the same copyright or reuse licence.

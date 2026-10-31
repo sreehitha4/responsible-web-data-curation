@@ -3,4 +3,4 @@ input_documents,6996
 documents_with_email_patterns,2046
 documents_with_phone_patterns,1206
 output_documents,6996
-execution_time_seconds,18.4094
+execution_time_seconds,15.3854

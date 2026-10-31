@@ -1,0 +1,6 @@
+metric,value
+spark_ingestion_wall_clock_seconds,16.6602
+deduplication_wall_clock_seconds,27.7212
+quality_filtering_wall_clock_seconds,28.1967
+pii_detection_and_redaction_wall_clock_seconds,22.9129
+total_pipeline_wall_clock_seconds,95.494

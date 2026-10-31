@@ -1,13 +1,13 @@
 stage,metric,value
 ingestion,documents,10000
-ingestion,ingestion_time_seconds,7.6711
-ingestion,documents_per_second,1303.59
+ingestion,ingestion_time_seconds,5.6937
+ingestion,documents_per_second,1756.33
 deduplication,initial_documents,10000
 deduplication,duplicate_groups,42
 deduplication,duplicates_removed,167
 deduplication,unique_documents,9833
 deduplication,removal_percentage,1.67
-deduplication,execution_time_seconds,19.0702
+deduplication,execution_time_seconds,14.6086
 quality_filtering,initial_documents,9833
 quality_filtering,empty_documents_removed,0
 quality_filtering,short_documents_removed,335
@@ -16,12 +16,12 @@ quality_filtering,low_alphabetic_ratio_removed,2467
 quality_filtering,final_documents,6996
 quality_filtering,total_removed,2837
 quality_filtering,removal_percentage,28.85
-quality_filtering,execution_time_seconds,22.2125
+quality_filtering,execution_time_seconds,16.2483
 pii_redaction,input_documents,6996
 pii_redaction,documents_with_email_patterns,2046
 pii_redaction,documents_with_phone_patterns,1206
 pii_redaction,output_documents,6996
-pii_redaction,execution_time_seconds,18.4094
+pii_redaction,execution_time_seconds,15.3854
 performance,documents,2500
 performance,measured_runs,3
 performance,median_execution_time_seconds,0.5165
@@ -34,3 +34,19 @@ performance,documents,10000
 performance,measured_runs,3
 performance,median_execution_time_seconds,0.7429
 performance,median_throughput_docs_per_second,13460.71
+pipeline_execution,spark_ingestion_wall_clock_seconds,16.6602
+pipeline_execution,deduplication_wall_clock_seconds,27.7212
+pipeline_execution,quality_filtering_wall_clock_seconds,28.1967
+pipeline_execution,pii_detection_and_redaction_wall_clock_seconds,22.9129
+pipeline_execution,total_pipeline_wall_clock_seconds,95.494
+cost_estimation,reference_instance,t3.medium
+cost_estimation,reference_region,ap-south-1
+cost_estimation,assumed_hourly_rate_usd,0.044800
+cost_estimation,pipeline_runtime_seconds,95.4940
+cost_estimation,pipeline_runtime_hours,0.02652611
+cost_estimation,input_documents,10000
+cost_estimation,estimated_compute_cost_usd,0.00118837
+cost_estimation,estimated_cost_per_1000_input_documents_usd,0.00011884
+cost_estimation,cost_type,Illustrative cloud-equivalent compute estimate
+cost_estimation,runtime_basis,Measured local pipeline runtime; assumed unchanged on reference instance
+cost_estimation,exclusions,"Storage, data transfer, taxes, and additional cloud services"

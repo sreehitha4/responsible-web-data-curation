@@ -1,0 +1,12 @@
+metric,value
+reference_instance,t3.medium
+reference_region,ap-south-1
+assumed_hourly_rate_usd,0.044800
+pipeline_runtime_seconds,95.4940
+pipeline_runtime_hours,0.02652611
+input_documents,10000
+estimated_compute_cost_usd,0.00118837
+estimated_cost_per_1000_input_documents_usd,0.00011884
+cost_type,Illustrative cloud-equivalent compute estimate
+runtime_basis,Measured local pipeline runtime; assumed unchanged on reference instance
+exclusions,"Storage, data transfer, taxes, and additional cloud services"
