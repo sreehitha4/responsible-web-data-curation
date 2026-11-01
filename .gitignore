@@ -230,3 +230,15 @@ metastore_db/
 
 # Project editor settings
 .vscode/
+
+# Additional virtual environments
+.venv*/
+.venv311/
+.pytest_cache/
+
+# Large generated model outputs
+results/toxicity_checkpoint.jsonl
+
+# Temporary files
+*.tmp
+*.bak

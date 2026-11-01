@@ -12,6 +12,8 @@ STAGES = [
     ("Deduplication", "src/deduplication.py"),
     ("Quality Filtering", "src/quality_filter.py"),
     ("PII Detection and Redaction", "src/pii_filter.py"),
+    ("Toxicity Detection and Filtering", "src/toxicity_pipeline.py"),
+    ("Language-wise Fairness Analysis", "src/language_fairness_analysis.py"),
 ]
 
 METRICS_FILE = PROJECT_ROOT / "results" / "pipeline_execution_metrics.csv"

@@ -1,0 +1,2 @@
+input_documents,flagged_documents,retained_documents,removal_rate,retention_rate,threshold,model,mean_toxicity_score,execution_time_seconds,throughput_documents_per_second
+6996,117,6879,0.01672384219554031,0.9832761578044596,0.5,unitary/toxic-bert,0.04203039283493022,3019.96,2.32
